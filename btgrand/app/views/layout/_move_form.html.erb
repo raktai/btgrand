@@ -1,0 +1,20 @@
+<center>
+<% form_remote_tag :url => {:controller => 'layout', :action => 'move'}, :html => {:id => 'move'} do %>
+	<%= hidden_field_tag  "transacid", @transac.id %><br /><br /><br />
+	<%= hidden_field_tag  "roomno", @transac.room_no %>
+	ย้ายห้อง 
+	<input type="checkbox" id="changeroom" name="changeroom" onchange="document.getElementById('payment_submit').disabled = !this.checked;document.getElementById('chooseroom').disabled = !this.checked; ">
+	<select id="chooseroom" name="chooseroom" disabled>
+	<% 
+	if not @freeroom.nil? 
+	  @freeroom.each do |room|
+	%>
+	<option value="<%= room %>"><%= room %></option>
+	<% 
+	  end 
+	end
+	%>
+	</select><br /><br />			
+	<input type="submit" value="ย้าย" id="payment_submit" class="ui-state-default ui-corner-all" disabled>
+<% end %>
+</center>

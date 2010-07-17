@@ -1,0 +1,112 @@
+html, body {
+	height:100%;	
+}
+
+#wrapper {	
+	min-height:100%;	
+}
+
+#nav {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-x-system-font:none;
+	background:#797673 none repeat scroll 0 0;
+	float:left;
+	font-family:'Arial Narrow',sans-serif;
+	font-size:14px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	height:35px;
+	line-height:35px;
+	text-transform:uppercase;
+	width:100%;
+}
+
+#nav li {
+	float:left;
+	height:35px;
+	letter-spacing:1px;
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	margin:-25px 0 0;
+	overflow:hidden;
+	padding:25px 0 0;
+	position:relative;
+	white-space:nowrap;
+	width:108px;
+}
+
+#nav a {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;	
+	background:transparent url(/images/nav_a.png) no-repeat scroll -99999px -99999px;
+	border-left:1px solid #898683;
+	color:#FFFFFF;
+	display:block;
+	text-align:center;
+	text-decoration:none;
+}
+
+#nav a:hover {
+	font-style: italic;
+}
+
+#nav li:first-child a {
+	border:0 none;
+}
+
+.nav_select {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:transparent url(/images/nav_arrow.png) no-repeat scroll center 0;
+}
+
+#header {	
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#F6F3F0 none repeat scroll 0 0;
+	border-bottom:1px solid #E6E3E0;
+	border-top:5px solid #FF9900;
+	margin:0 0 20px;
+	padding:20px 0 0;	
+}
+
+#footer {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#595653 none repeat scroll 0 0;
+	height:40px;
+	line-height:40px;
+	margin-top: 25px;	
+	overflow:hidden;	
+	text-align: center;
+}
+
+#r_box {	
+	height: 35px;
+	background:#797673;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	
+	display: table;
+	color:#FFFFFF;			
+}
+
+#r_text{
+	width: 100%;
+	height: 100%;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	cursor: pointer;
+}

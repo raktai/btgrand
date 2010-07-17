@@ -1,0 +1,21 @@
+<center>
+<% if not @transac.nil? %>	
+	<% form_remote_tag :url => {:controller => 'layout', :action => 'checkout'}, :html => {:id => 'checkout'} do %>
+		<%= hidden_field_tag  "transacid", @transac.id %><br />	
+		<span style="font-weight: bold;text-align: right;display: inline-block;width: 150px;"><%= @bal < 0 ? 'ยอดค้างชำระ' : 'บัญชีคงเหลือ' %> :</span> <span style="text-align: right;display: inline-block;width: 50px;"><%= '%d' % @bal %></span><br /><br />
+		<span style="font-weight: bold;text-align: right;display: inline-block;width: 150px;">ค่ามัดจำคีย์การ์ด :</span> <span style="text-align: right;display: inline-block;width: 50px; border-bottom: solid thin;"><%= '%d' % @transac.deposit %></span><br /><br />
+
+	
+		<% if @transac.deposit + @bal < 0 %>
+			<span style="font-weight: bold;text-align: right;display: inline-block;width: 150px;">ต้องชำระเพิ่ม :</span> <span id="needpay" style="text-align: right;display: inline-block;width: 50px;color: red; border-bottom: double;"><%= '%d' % (-1*(@bal)-@transac.deposit) %></span><br /><br />
+			<hr size="1">
+			 ป้อนจำนวนเงินที่ต้องชำระ <input type="text" name="pay_checkout" id="pay_checkout" value="0" style="text-align: right;display: inline-block;width: 50px;" class="num_text_box"/><br />
+			 <div id="show_error"></div>
+		<% else %>
+			<span style="font-weight: bold;text-align: right;display: inline-block;width: 150px;">คืนเงิน :</span> <span id="needpay" style="text-align: right;display: inline-block;width: 50px;color: #008000; border-bottom: double;"><%= '%d' % ((@bal)+@transac.deposit) %></span><br /><br />
+		<% end %>
+	
+	<input type="submit" value="เช็คเอาต์" class="ui-state-default ui-corner-all" id="payment_submit">	<br />
+	<% end %>
+<% end %>
+</center>

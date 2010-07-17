@@ -1,0 +1,9 @@
+<% if not @transac.nil? %>	
+	<% form_remote_tag :url => {:controller => 'layout', :action => 'dopay'}, :html => {:id => 'payment'} do %>
+		<div>
+			<%= hidden_field_tag  "transacid", @transac.id %>
+			<%= hidden_field_tag  "roomno", @transac.room_no %>
+			<%= payment_form @transac %>
+		</div>
+	<% end %>
+<% end %>

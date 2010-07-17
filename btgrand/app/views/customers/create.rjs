@@ -1,0 +1,5 @@
+page.replace_html("customers_list", :partial => "each_customer", :collection => @customers)
+
+page.call "add_image_click"
+
+page.call "close_dialog"

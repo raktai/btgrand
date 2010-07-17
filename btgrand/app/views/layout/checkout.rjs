@@ -1,0 +1,6 @@
+if @error.nil?
+  page.redirect_to(:action => 'index')
+else
+  page.replace_html("show_error", :partial => "checkout_error", :object => @transac)
+  page[:pay_checkout].visual_effect   :highlight, :startcolor => "#ffff00", :endcolor => "#ffffff"
+end

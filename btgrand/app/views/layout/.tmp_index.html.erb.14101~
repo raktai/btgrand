@@ -1,0 +1,55 @@
+<% content_for(:head) do %>	
+	<%= stylesheet_link_tag 'layout' %>		
+	<script type="text/javascript">
+		jQuery(function() {
+			jQuery(".normal_room").hover(function() {
+				jQuery(this).addClass("over");				
+			},function() {
+				jQuery(this).removeClass("over");				
+			});					
+		});		
+	</script>
+<% end %>
+
+<% content_for(:body) do %>
+	<div class="grid_2 e_empty">
+		<div id="right_panel">
+			ห้องห้ามขาย
+		</div>
+	</div>
+	<div class="grid_10">
+		<div class="floor">
+			ชั้น 5
+		</div>		
+	</div>
+	<% full_floor %> 	
+	<% full_floor %>
+	<div class="grid_10">
+		<div class="floor">
+			ชั้น 4
+		</div>		
+	</div>
+	<% full_floor %> 	
+	<% full_floor %>
+	<div class="grid_10">
+		<div class="floor">
+			ชั้น 3
+		</div>		
+	</div>
+	<% full_floor %> 	
+	<% full_floor %>
+	<div class="grid_10">
+		<div class="floor">
+			ชั้น 2
+		</div>		
+	</div>
+	<% full_floor %> 	
+	<% full_floor %>
+	<div class="grid_10">
+		<div class="floor">
+			ชั้น 1
+		</div>		
+	</div>
+	<% full_floor %> 	
+	<% full_floor %>	
+<% end %>

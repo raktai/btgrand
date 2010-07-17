@@ -1,0 +1,5 @@
+if @error.nil?
+  page.redirect_to(:action => 'index')
+else
+  page.replace_html("cancel_error", :partial => "checkout_error", :object => @transac)
+end

@@ -1,0 +1,113 @@
+#main div {
+	
+}
+
+#detail {
+	line-height: 30px;
+	padding: 10px 0 0 10px;
+	background-color: #FCEFA1;		
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	
+}
+
+#detail h6 {	
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+#status {
+	text-align: center;	
+}
+
+#lremark {
+	width: 65px;
+}
+
+#remark {
+	margin-top: 5px;
+	margin-left: -10px;
+	width: 95%;
+}
+
+#btnSubmit {
+	margin-left: -10px;
+	height: 30px;
+}
+
+.label {
+	text-align: right;
+	font-weight: bold;
+}
+
+.block {
+	display: inline-block;
+	width: 100px;
+}
+
+#status, #action, #action2 {
+	float: right;
+}
+
+#status, #action, #action2, #history {
+	line-height: 30px;
+	padding: 10px 0 10px 0;	
+	background-color: #e6fddb;		
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	
+}
+
+#action, #action2, #history {
+	margin-top: 10px;
+	background-color: #FFFFCC;
+	text-align: center;
+}
+
+#history {
+	text-align: left;
+	line-height: normal;
+	
+}
+
+#list_header {
+	font-weight: bold;
+	border-bottom: solid 1px;
+}
+
+.paylist {
+	color: #CD0A0A;	
+}
+
+.pdetail {
+	display: inline-block;
+	width: 70%;
+}
+
+.price {
+	display: inline-block;
+	width: 15%;
+	text-align: right;
+}
+
+.payed {
+	color: #000;
+}
+
+#payment_submit {
+	height: 30px;
+	margin-top: 15px;	
+}
+
+.num_text_box {
+	text-align: right;
+	width: 60px;	
+}
+
+textarea {
+	border: solid 1px #c0c0c0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#pay_checkout {
+	border: solid 1px #c0c0c0;
+}

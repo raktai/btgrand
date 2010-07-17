@@ -1,0 +1,105 @@
+<% content_for(:head) do %>	
+	<%= stylesheet_link_tag 'layout' %>		
+	<script type="text/javascript">
+		var year = '<%= @date.year %>';
+		var month = '<%= @date.month-1 %>';
+		var day = '<%= @date.day %>';
+		
+		jQuery(function() {
+			jQuery(".normal_room").hover(function() {
+				jQuery(this).addClass("over");				
+			},function() {
+				jQuery(this).removeClass("over");				
+			});					
+		});		
+		
+		jQuery(function() {
+			jQuery(".normal_room").click(function(){
+				jQuery(this).removeClass("over");
+				window.location.href = "http://<%= request.env['HTTP_HOST'] %>/checkin/" + jQuery(this).attr('id');
+			})
+		});
+		
+		jQuery(function() {
+			jQuery(".occupied, .checkout, .overcheckout").click(function(){
+				jQuery(this).removeClass("over");
+				window.location.href = "http://<%= request.env['HTTP_HOST'] %>/detail/" + jQuery(this).attr('id');
+			});			
+		});
+		
+		jQuery(function() {
+			jQuery("#free_count")[0].innerHTML = jQuery(".normal_room").length;
+			jQuery("#occu_count")[0].innerHTML = jQuery(".occupied").length;
+			jQuery("#chko_count")[0].innerHTML = jQuery(".checkout").length;
+			jQuery("#ocko_count")[0].innerHTML = jQuery(".overcheckout").length;
+		});	 	 
+		
+		jQuery(function() {
+			jQuery('#datepicker').datepicker({
+					minDate: -0,
+	   				onSelect: function(dateText, inst) {
+						 	var theDate = new Date(Date.parse(jQuery(this).datepicker('getDate')));
+	                        var dateFormatted = jQuery.datepicker.formatDate('ddmmyy', theDate); 
+							window.location.href = "http://<%= request.env['HTTP_HOST'] %>/" +dateFormatted;
+							//alert("<%= request.env['HTTP_HOST'] %>"); 
+						 }
+			});		
+			jQuery('#datepicker').datepicker('option', jQuery.extend({showMonthAfterYear: false},
+					jQuery.datepicker.regional['th']));
+		   	jQuery('#datepicker').datepicker('option', {dateFormat: 'd MM yy'}); 
+			var myDate=new Date();	
+			myDate.setFullYear(year, month, day)	
+			jQuery('#datepicker').datepicker( 'setDate' , myDate );
+			jQuery('#datepicker').attr( 'readOnly' , 'true' );
+			jQuery('#datepicker').attr( 'style' , 'cursor: pointer;' );		
+		});
+	</script>
+<% end %><!--end head-->
+
+<% content_for(:body) do %>
+	<div class="grid_10" id="top_panel">
+		<div class="grid_4"><b>วันที่ :</b> <input type="text" id="datepicker"></div>
+		<div id="room_status" class="grid_5">
+			ว่าง <div id="free_count" class="small_block">0</div>
+			ใช้งาน <div id="occu_count" class="small_block">0</div>
+			ออก <div id="chko_count" class="small_block">0</div>
+			เลยเวลา <div id="ocko_count" class="small_block">0</div>
+		</div>
+	</div>
+
+	<div class="grid_2 e_empty">
+		<div id="right_panel">
+			รายการอื่น
+		</div>
+	</div>
+	<div class="grid_10">
+		<div class="floor">
+			ชั้น 5
+		</div>		
+	</div>
+	<% full_floor 5 %>
+	<div class="grid_10">
+		<div class="floor">
+			ชั้น 4
+		</div>		
+	</div>
+	<% full_floor 4 %>
+	<div class="grid_10">
+		<div class="floor">
+			ชั้น 3
+		</div>		
+	</div>	 
+	<% full_floor 3 %>
+	<div class="grid_10">
+		<div class="floor">
+			ชั้น 2
+		</div>		
+	</div>
+	<% full_floor 2 %>
+	<div class="grid_10">
+		<div class="floor">
+			ชั้น 1
+		</div>		
+	</div>
+	<% full_floor 1 %>	
+<% end %><!--end content-->

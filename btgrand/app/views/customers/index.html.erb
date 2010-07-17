@@ -1,0 +1,168 @@
+<% content_for(:head) do %>
+	<%= javascript_include_tag :defaults %>
+	<%= stylesheet_link_tag 'customers' %>
+	<%= stylesheet_link_tag 'new_customer' %>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			add_image_click();
+		});
+		
+		
+		jQuery(function() {
+			jQuery(function() {
+				jQuery("a", "#new_customer").button();							
+				
+				jQuery("a", "#new_customer").click(function() {
+					jQuery('#dialog').attr('innerHTML','<div style="text-align:center;"><%= image_tag("loading.gif") %></div>');
+					
+					if(jQuery(this).attr('id') == 'new_button'){
+						jQuery("#dialog").dialog( "option", "title", "เพิ่มข้อมูลลูกค้าใหม่");	
+						<%= remote_function(:request => "dialog", :method => :get, :url => { :action => :new }) %>;
+					}
+					
+					jQuery("#dialog").dialog( 'open' );
+				});
+			});					
+			
+			jQuery("#dialog").dialog({
+				bgiframe: true,
+				modal: true,
+				autoOpen: false,
+				Height: 540,
+				minHeight: 540,						
+				width: 600,
+				minWidth: 600,
+				buttons: {
+					'ยกเลิก': function() {
+						jQuery(this).dialog('close');
+					}
+				}
+			});
+			
+			jQuery("#dialog_confirm").dialog({
+				resizable: false,
+				height:200,
+				width: 300,
+				bgiframe: true,
+				modal: true,
+				autoOpen: false,
+				buttons: {					
+					'ยกเลิก': function() {
+						jQuery(this).dialog('close');
+					},
+					'ลบรายการนี้': function() {
+						<%= remote_function(:request => "dialog_confirm", :method => :post, :url => { :action => :destroy }, :with => "'&id='+jQuery('#destroy_id').val()+'&search='+jQuery('#search').val()") %>;						
+					}
+				}
+			});
+
+			
+			jQuery('input','#search').keydown(function(event) {
+				if (event.keyCode == 13) {
+					jQuery('#customers_list').attr('innerHTML','<tr><td align="center" colspan="7"><%= image_tag("loading.gif") %></td></tr>');					
+				} else {
+					return true;
+				}
+				}); //endTextMessage keyup
+		});		
+		
+		function make_num_txtbox(){
+			jQuery(".num_text_box").keydown(function(event) {
+				// Allow only backspace and delete	
+				if ( event.keyCode == 46 || event.keyCode == 8 
+					 || (event.keyCode >= 96 && event.keyCode <= 105) 
+					 || (event.keyCode >= 35 && event.keyCode <= 40)) {
+					// let it happen, don't do anything
+				}
+				else {
+					// Ensure that it is a number and stop the keypress
+					if (event.keyCode < 48 || event.keyCode > 57 ) {
+						event.preventDefault();	
+					}	
+				}
+			});
+		}			
+		
+		function close_dialog(){
+			jQuery("#dialog").dialog( 'close' );
+		}	
+		
+		function after_search(){
+			//jQuery('input','#search').removeAttr('disabled');
+			//jQuery('input','#search').removeClass('readonly');
+			jQuery("search").dialog('close');
+			if(jQuery('#customers_list').attr('innerHTML')==''){
+				jQuery('#customers_list').attr('innerHTML','<tr><td colspan="9" align="center">ไม่พบข้อมูลลูกค้า</td></tr>');
+			}
+			add_image_click();
+		}
+		
+		function make_view_detail(){
+			jQuery("input, textarea", "#new_form").attr("readonly", true);
+			jQuery("#btn_submit").attr("disabled", true);
+			jQuery("input, textarea", "#new_form").addClass("readonly");		
+			
+			jQuery("#edit_img").click(function(){
+		       	jQuery("input, textarea", "#new_form").removeAttr("readonly");
+				jQuery("#btn_submit").removeAttr("disabled");
+				jQuery("input, textarea", "#new_form").removeClass("readonly");
+		    });	
+		}
+		
+		function add_image_click(){
+			jQuery("img[cust_id]").click(function(){
+		       	jQuery('#dialog').attr('innerHTML','<div style="text-align:center;"><%= image_tag("loading.gif") %></div>');
+					
+				jQuery("#dialog").dialog( "option", "title", 'ข้อมูลลูกค้า <%= image_tag("edit.gif", :border=>0, :title => "แก้ไข", :id => "edit_img") %>');	
+				<%= remote_function(:request => "dialog", :method => :get, :url => { :action => :show }, :with => "'&id='+jQuery(this).attr('cust_id')") %>;
+				
+				jQuery("#dialog").dialog( 'open' );
+		    });
+			
+			jQuery("img[del_id]").click(function(){		       	
+				var name = jQuery(this).parent().parent();
+				jQuery("#destroy_id").val(jQuery(this).attr("del_id"));
+				name = name.children()[0].innerHTML +  " " + name.children()[1].innerHTML;
+				jQuery("#confirm_data").attr('innerHTML', name);
+				jQuery("#dialog_confirm").dialog( 'open' );
+		    });
+		}
+	</script>
+<% end %>
+
+<% content_for(:body) do %>
+	<div id="dialog" title="..."></div>
+	<div id="dialog_confirm" title="ยืนยันการลบ">
+		<input type="hidden" id="destroy_id">
+		ต้องการลบ: 	
+		<span id="confirm_data"></span><br /><br />	
+		ไม่สามารถยกเลิกการลบได้ แน่ใจ?
+	</div>
+	<div class="grid_1" id="left_blank">&nbsp;</div>
+	<% form_remote_tag :url => {:controller => 'customers', :action => 'search'} do %>
+	<div id="search_bar" class="grid_10">			
+		<div id="search_cell">				
+			<div id="new_customer"><a href="#" id="new_button">เพิ่มลูกค้า</a></div><%= text_field_tag :search, params[:search], :class=>"searchtextbox"%>						
+		</div>
+	</div>	
+	<% end %>			
+	
+	<div id="tableresult" class="grid_10">	
+	<table id="customers">
+		<thead>		
+			<tr>    
+				<th>ชื่อ</th>
+				<th>นามสกุล</th>
+				<th>ชื่อเล่น</th>
+				<th>เบอร์โทร</th>
+				<th>เบอร์ที่ทำงาน</th>
+				<th colspan="2"></th>
+			</tr>	
+		</thead>		
+		<tbody id="customers_list">
+			<%= render(:partial => "each_customer", :collection => @customers) %>			
+		</tbody>		
+	</table>	
+	</div>
+	
+<% end %>

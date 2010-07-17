@@ -1,0 +1,13 @@
+page.replace_html("checkout_date", :partial => "checkout_date", :object => @transac)
+
+page.replace_html("status", :partial => "paystatus", :object => @transac)
+
+page.replace_html("list_detail", :partial => "paylist", :object => @transac)
+
+page.call "close_dialog"
+
+page[:checkout_date].visual_effect   :highlight, :startcolor => "#ffff00", :endcolor => "#ffffff"
+
+page[:status].visual_effect   :highlight, :startcolor => "#ffff00", :endcolor => "#ffffff"
+
+page[:list_detail].visual_effect   :highlight, :startcolor => "#ffff00", :endcolor => "#ffffff"

@@ -1,0 +1,93 @@
+.searchtextbox {
+	background: url(/images/find.gif) no-repeat;	
+	background-position: 2px center;	
+	padding: 4px 0px 4px 20px; 
+		
+	border: 1px solid #CCCCCC;
+	width: 200px;	
+}
+
+#search_bar {
+	display: inline-table;
+	margin-bottom: 10px;	
+}
+
+#search_cell {
+	display: table-cell;	
+	vertical-align: middle;
+	text-align: right;
+}
+
+#new_customer {	
+	margin-right: 10px;	
+	display: inline-block;
+}
+
+#new_customer a {
+	height: 27px;	
+	font-size: 13px;	
+}
+
+#customers {
+	width: 100%;
+	background-color: #FCEFA1;	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	
+}
+
+#customers th {
+	text-align: left;
+	font-weight: bolder;
+	border-bottom: solid 2px #c0c0c0;	
+}
+
+#customers_list img {	
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+tbody tr {
+	border-bottom: solid 1px #c0c0c0;
+	background-color: #FFFFF0;
+}
+
+tbody tr:hover {
+	background-color: #FFFFCC;
+}
+
+tr:last-child {
+	border-bottom: none;
+}
+
+td, th {
+	padding: 5px;			
+}
+
+.list-line-odd {
+	
+}
+
+.list-line-even {
+}
+
+#left_blank {
+	height: 200px;
+}
+
+.readonly {
+	background-color: #E6FDDB;
+}
+
+#edit_img {
+	vertical-align: text-bottom;
+	cursor: pointer;
+}
+
+#dialog_confirm {
+	text-align: center;
+	color: #CD0A0A;
+}
+
+#confirm_data {
+	color: #000;
+}

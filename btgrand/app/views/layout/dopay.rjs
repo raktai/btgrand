@@ -1,0 +1,11 @@
+page.replace_html("status", :partial => "paystatus", :object => @transac)
+
+page.replace_html("list_detail", :partial => "paylist", :object => @transac)
+
+page.replace_html("dialog", :partial => "payment", :object => @transac)
+
+page.call "make_num_txtbox"
+
+page[:status].visual_effect   :highlight, :startcolor => "#ffff00", :endcolor => "#ffffff"
+
+page[:list_detail].visual_effect   :highlight, :startcolor => "#ffff00", :endcolor => "#ffffff"

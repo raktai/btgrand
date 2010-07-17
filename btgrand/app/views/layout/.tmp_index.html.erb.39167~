@@ -1,0 +1,17 @@
+<% content_for(:body) do %>
+	<%= f_empty_block 2 %><div class="grid_10 floor">ชั้น 5</div>
+	<%= f_empty_block 2 %><% full_floor %> 	
+	<%= f_empty_block 2 %><% full_floor %>
+	<%= f_empty_block 2 %><div class="grid_10 floor">ชั้น 4</div>
+	<%= f_empty_block 2 %><% full_floor %> 	
+	<%= f_empty_block 2 %><% full_floor %>
+	<%= f_empty_block 2 %><div class="grid_10 floor">ชั้น 3</div>
+	<%= f_empty_block 2 %><% full_floor %> 	
+	<%= f_empty_block 2 %><% full_floor %>
+	<%= f_empty_block 2 %><div class="grid_10 floor">ชั้น 3</div>
+	<%= f_empty_block 2 %><% full_floor %> 	
+	<%= f_empty_block 2 %><% full_floor %>
+	<%= f_empty_block 2 %><div class="grid_10 floor">ชั้น 1</div>
+	<%= f_empty_block 2 %><% full_floor %> 	
+	<%= f_empty_block 2 %><% full_floor %>
+<% end %>

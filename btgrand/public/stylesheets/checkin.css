@@ -1,0 +1,70 @@
+#form {
+	background-color: #FCEFA1;
+	padding: 5px;
+	line-height: 30px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#form h6, #errorExplanation h6 {
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+input {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border: solid 1px #E6E3E0;
+}
+
+textarea {
+	margin-top: 5px;
+}
+
+.submit {
+	text-align: center;
+}
+
+.label {
+	text-align: right;	
+}
+
+.readonly {
+	background-color:#EDEDED;
+}
+
+.num_text_box {
+	text-align: right;
+	width: 60px;	
+}
+
+.c_price {
+	width: 20px;
+}
+
+#transac_room_no {
+	text-align: center;
+}
+
+#r_panel {	
+	float: right;	
+}
+
+#err_border {
+	color: red;
+	border: solid 1px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+#errorExplanation {
+	margin: 10px;	
+}
+
+.fieldWithErrors {
+	display: inline;
+}
+
+.fieldWithErrors input,.fieldWithErrors textarea {
+	border-color: red;
+}

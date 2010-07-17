@@ -1,0 +1,5 @@
+<% form_remote_tag :url => {:controller => 'layout', :action => 'changeremark'} do %>
+	<%= hidden_field_tag  "transacid", @transac.id %>
+	<textarea name="remark" id="remark" rows="5" cols="0" ><%=h @transac.remark %></textarea><br />
+	<%= submit_tag "บันทึกหมายเหตุ", :id => "btnSubmit", :class => "ui-state-default ui-corner-all" %>	<br />
+<% end %>

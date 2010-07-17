@@ -1,0 +1,16 @@
+<center>
+<% if not @transac.nil? %>
+	<% if true or Time.now - @transac.checkin < (60*60) %>
+		<br /><br />		
+		<b>ใส่เหตุผลที่ยกเลิก :</b>(ไม่สามารถแก้ไขได้)<br />
+		<% form_remote_tag :url => {:controller => 'layout', :action => 'cancel'}, :html => {:id => 'cancel'} do %>
+			<%= hidden_field_tag  "transacid", @transac.id %><br />	
+			<textarea style="display: block; width:85%;" name="remark" id="remark" rows="3" ></textarea><br />
+			<div id="cancel_error"></div>
+			<input type="submit" value="ยกเลิกห้อง" class="ui-state-default ui-corner-all" id="payment_submit" >	<br />
+		<% end %>
+	<% else %>
+		ไม่สามารถยกเลิกได้
+	<% end %>
+<% end %>
+</center>

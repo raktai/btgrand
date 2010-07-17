@@ -1,0 +1,76 @@
+<% content_for(:head) do %>	
+	<%= stylesheet_link_tag 'checkin' %>
+	<script type="text/javascript">
+		jQuery(function() {
+			jQuery(".c_price").click(function(){
+				if(jQuery(this).val()==0){
+					jQuery("#transac_price").removeAttr("readonly");
+					jQuery("#transac_price").removeClass("readonly");						
+				} else {
+					jQuery("#transac_price").attr("readonly", true);
+					jQuery("#transac_price").addClass("readonly");					
+				}
+				jQuery("#transac_price").val(jQuery(this).val());
+				jQuery("#transac_sum").val(jQuery("#transac_price").val()*jQuery("#transac_days").val());
+			});
+			
+			jQuery(".num_text_box").keydown(function(event) {
+				// Allow only backspace and delete	
+				if ( event.keyCode == 46 || event.keyCode == 8 
+					 || (event.keyCode >= 96 && event.keyCode <= 105) 
+					 || (event.keyCode >= 35 && event.keyCode <= 40)) {
+					// let it happen, don't do anything
+				}
+				else {
+					// Ensure that it is a number and stop the keypress
+					if (event.keyCode < 48 || event.keyCode > 57 ) {
+						event.preventDefault();	
+					}	
+				}
+			});
+			
+			jQuery("#transac_days").change(function(){
+				jQuery("#transac_sum").val(jQuery("#transac_price").val()*jQuery("#transac_days").val());
+			});
+
+		});
+	</script>
+<% end %><!--end head-->
+
+<% content_for(:body) do %>	
+	<% form_for @transac, :url => { :action => :checkin } do |f| %>
+		<div class="grid_10">
+			<h3>เช็คอิน</h3>
+		</div>		
+		<div id="form" class="grid_7">
+			<div class="grid_4"><h6>กรอกรายละเอียด</h6></div><br />
+			<div class="grid_2 label">ห้อง :</div> 
+			<div class="grid_4"><%= f.text_field :room_no , :readonly => true, :class => "readonly num_text_box" %></div><br />
+			<div class="grid_2 label">ชื่อ-นามสกุล :</div> 
+			<div class="grid_4"><%= f.text_field :customer_name %></div><br />
+			<div class="grid_2 label">โทรศัพท์ :</div> 
+			<div class="grid_4"><%= f.text_field :customer_phone %></div><br />
+			<div class="grid_2 label">ราคา :</div>
+			<div class="grid_4 omega"><%= f.text_field :price, :class => 'num_text_box', :maxlength => 4, :value => '%d' % f.object.price||= 0  %>
+				<input type="radio" name="price_choose" class="c_price" value="350">350
+				<input type="radio" name="price_choose" class="c_price" value="550">550
+				<input type="radio" name="price_choose" class="c_price" value="700">700
+				<input type="radio" name="price_choose" class="c_price" value="0" checked>ใส่ราคา
+			</div><br />
+			<div class="grid_2 label">วัน :</div> 
+			<div class="grid_4"><%= f.text_field :days, :class => 'num_text_box', :maxlength => 4, :value => '%d' % f.object.days||= 1  %></div><br />
+			<div class="grid_2 label">รวม :</div> 
+			<div class="grid_4"><%= f.text_field :sum, :class => 'num_text_box readonly', :maxlength => 4, :value => '%d' % (f.object.days.to_i * f.object.price)  %></div><br />
+			<div class="grid_2 label">รายรับ :</div>
+			<div class="grid_4"><%= f.text_field :pay, :class => 'num_text_box', :maxlength => 4, :value => '%d' % f.object.pay||= 0  %></div><br />
+			<div class="grid_2 label">มัดจำ :</div>  
+			<div class="grid_4"><%= f.text_field :deposit, :class => 'num_text_box', :maxlength => 4, :value => '%d' % f.object.deposit||= 0  %></div><br />
+			<div class="grid_2 label">หมายเหตุ :</div>
+			<div class="grid_4"><%= f.text_area :remark, :rows=>3 %></div><br />			
+			<div class="grid_7 alpha submit" ><%= f.submit "บันทึก" %></div>
+		</div>
+		<div id="r_panel" class="grid_5 alpha">
+			<%= error_messages_for :transac, :header_message => "เกิดข้อผิดพลาด", :message => "โปรดตรวจสอบ" %>	
+		</div>
+	<% end %><!--end form-->
+<% end %><!--end body-->

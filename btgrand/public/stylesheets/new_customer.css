@@ -1,0 +1,70 @@
+#new_form {
+	line-height: 30px;	
+}
+
+label {
+	display: inline-block;
+	text-align: right;
+	margin-right: 10px;	
+	width: 110px;	
+	font-weight: bold;
+}
+
+input {
+	width: 120px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border: solid 1px #CCCCCC;
+}
+
+textarea {
+	margin-top: 3px;
+	margin-left: -1px;
+	width: 376px;
+	vertical-align: top;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border: solid 1px #CCCCCC;
+}
+
+#customer_vehicle, #customer_company {
+	width: 373px;
+}
+
+#btn_submit {
+	height: 30px;
+	margin-top: 15px;	
+	cursor: pointer;
+}
+
+hr {
+	margin-bottom: 5px;
+}
+
+.num_text_box {
+	text-align: right;
+	width: 60px;	
+}
+
+#err_border {
+	color: red;
+	border: solid 1px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	line-height: normal;
+	width: 80%;
+	text-align: left;
+}
+
+#errorExplanation {
+	margin: 10px;		
+}
+
+.fieldWithErrors {
+	display: inline;
+}
+
+.fieldWithErrors input,.fieldWithErrors textarea {
+	border-color: red;
+}
+

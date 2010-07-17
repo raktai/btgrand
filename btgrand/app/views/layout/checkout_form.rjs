@@ -1,0 +1,3 @@
+page.replace_html("dialog", :partial => "checkout_form", :object => @transac)
+
+page.call "make_num_txtbox"

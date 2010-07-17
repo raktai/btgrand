@@ -1,0 +1,117 @@
+<% content_for(:head) do %>	
+	<%= javascript_include_tag :defaults %>
+	<%= stylesheet_link_tag 'detail' %>
+	<script type="text/javascript">
+		jQuery(function() {
+			jQuery(function() {
+				jQuery("a", "#action, #action2").button();
+				
+				jQuery("a", "#action, #action2").click(function() {
+					jQuery('#dialog').attr('innerHTML','<div style="text-align:center;"><%= image_tag("loading.gif") %></div>');
+					
+					if(jQuery(this).attr('id') == 'pay'){
+						jQuery("#dialog").dialog( "option", "title", "ทำรายการจ่ายเงิน");						
+						<%= remote_function(:request => "dialog", :method => :get, :url => { :action => :payment }, :with => "'&roomno="+@transac.room_no.to_s+"'" ) %>;												
+					}else if (jQuery(this).attr('id') == 'expandday'){
+						jQuery("#dialog").dialog( "option", "title", "ต่อห้อง");
+						<%= remote_function(:request => "dialog", :method => :get, :url => { :action => :expandday }, :with => "'&roomno="+@transac.room_no.to_s+"'" ) %>;
+					}else if (jQuery(this).attr('id') == 'moveroom'){
+						jQuery("#dialog").dialog( "option", "title", "ย้ายห้อง");
+						<%= remote_function(:request => "dialog", :method => :get, :url => { :action => :move_form }, :with => "'&roomno="+@transac.room_no.to_s+"'" ) %>;
+					}else if (jQuery(this).attr('id') == 'checkout'){
+						jQuery("#dialog").dialog( "option", "title", "เช็คเอาต์");
+						<%= remote_function(:request => "dialog", :method => :get, :url => { :action => :checkout_form }, :with => "'&roomno="+@transac.room_no.to_s+"'" ) %>;
+					}else if (jQuery(this).attr('id') == 'cancel'){
+						jQuery("#dialog").dialog( "option", "title", "ยกเลิก");
+						<%= remote_function(:request => "dialog", :method => :get, :url => { :action => :cancel_form }, :with => "'&roomno="+@transac.room_no.to_s+"'" ) %>;
+					}
+					
+					jQuery("#dialog").dialog( "option", "height", 470 );
+					jQuery("#dialog").dialog( 'open' );
+				});
+			});					
+			
+			jQuery("#dialog").dialog({
+				bgiframe: true,
+				modal: true,
+				autoOpen: false,
+				Height: 470,
+				minHeight: 470,						
+				width: 520,
+				minWidth: 520,
+				buttons: {
+					ปิด: function() {
+						jQuery(this).dialog('close');
+					}
+				}
+			});
+		});		
+		
+		function make_num_txtbox(){
+			jQuery(".num_text_box").keydown(function(event) {
+				// Allow only backspace and delete	
+				if ( event.keyCode == 46 || event.keyCode == 8 
+					 || (event.keyCode >= 96 && event.keyCode <= 105) 
+					 || (event.keyCode >= 35 && event.keyCode <= 40)) {
+					// let it happen, don't do anything
+				}
+				else {
+					// Ensure that it is a number and stop the keypress
+					if (event.keyCode < 48 || event.keyCode > 57 ) {
+						event.preventDefault();	
+					}	
+				}
+			});
+		}			
+		
+		function close_dialog(){
+			jQuery("#dialog").dialog( 'close' );
+		}	
+	</script>
+<% end %><!--end head-->
+
+<% content_for(:body) do %>		
+	<div id="dialog" title="..."></div>
+	<div class="grid_12">
+		<h3 id="room_title"><%= render :partial => "room_title" %></h3>
+	</div>				
+	<div id="detail" class="grid_7">			
+		<div class="grid_1 label">ชื่อ :</div><div class="grid_2"><%= @transac.customer_name%></div><br />
+		<div class="grid_1 label">โทรศัพท์ :</div><div class="grid_4"><%= @transac.customer_phone%></div><br />
+		<div class="grid_1 label">ค่าห้อง :</div><div class="grid_2"><%= '%d' % @transac.price%></div><br />
+		<div class="grid_1 label">เข้า :</div><div class="grid_2"><%= @transac.checkin.strftime('%d/%m/%Y - %H:%M') %></div>
+		<div class="grid_1 label">ออก :</div><div class="grid_2" id="checkout_date"><%= render :partial => "checkout_date" %></div><br />			
+		<div id="lremark" class="grid_1 label">หมายเหตุ :</div>
+					
+		<div id="fremark" class="grid_5">
+			<%= render :partial => "remark" %>
+		</div><br />
+		
+		<div id="list_header" class="grid_6">
+			รายการ
+		</div>
+		
+		<div id="list_detail" class="grid_6">
+			<%= render :partial => "paylist" %>
+			
+		</div>
+	</div>				
+	<div id="status" class="grid_5 alpha">
+		<%= render :partial => "paystatus"%>
+	</div>
+	
+	<div id="action" class="grid_5 alpha">
+		<a href="#" id="pay">จ่ายเงิน</a> &nbsp;
+		<a href="#" id="expandday">ต่อห้อง</a> &nbsp;
+		<a href="#" id="moveroom">ย้าย</a> &nbsp;
+		<a href="#" id="checkout">เช็คเอาต์</a>
+	</div>
+	
+	<div id="action2" class="grid_5 alpha">
+		 &nbsp;<a href="#" id="cancel">ยกเลิกห้อง</a>
+	</div>
+	
+	<div id="history" class="grid_5 alpha">
+		 <%= render :partial => "room_history"%>
+	</div>				
+<% end %><!--end body-->

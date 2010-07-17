@@ -1,0 +1,46 @@
+<div id="new_form" class="">
+<% remote_form_for :customer, @customer, :url => {:controller => 'customers', :action => "create"} do |f| %>
+  <div align="center"><%= error_messages_for :customer, :header_message => "เกิดข้อผิดพลาด", :message => "โปรดตรวจสอบ" %></div>	
+	<label>ชื่อ</label>
+	<%= f.text_field :name %>
+	
+	<label>นามสกุล</label>
+	<%= f.text_field :sname %><br />
+	
+	<label>ชื่อเล่น</label>
+	<%= f.text_field :nickname %>
+	
+	<label>บัตร ปชช.</label>
+	<%= f.text_field :identity_number %><br />
+	
+	<label>ราคา</label>
+	<%= f.text_field :last_price, :value => sprintf('%0.0f', @customer.last_price || 350), :class => "num_text_box"   %><br />
+	
+	<label>โทรศัพท์</label>
+	<%= f.text_field :phone %>
+	
+	<label>โทรศัพท์ที่ทำงาน</label>
+	<%= f.text_field :phone_work %><br />
+	
+	<label>ที่อยู่ ตามบัตรประชาชน</label>
+	<%= f.text_area :address_home, :rows=>3 %><br />
+	
+	<hr size="1">
+	
+	<label>ชื่อบริษัท</label>
+	<%= f.text_field :company %><br />
+	
+	<label>ที่อยู่บริษัท</label>
+	<%= f.text_area :address_work, :rows=>3 %><br />
+	
+	<hr size="1">
+	
+	<label>ข้อมูลรถ</label>
+	<%= f.text_field :vehicle %><br />
+	
+	<label> หมายเหตุ</label>
+	<%= f.text_area :remark, :rows=>3 %><br />
+	
+	<div align="center"><input type="submit" value="บันทึก" id="btn_submit" class="ui-state-default ui-corner-all"></div>
+<% end %>	
+</div>

@@ -1,0 +1,10 @@
+<center>
+<% form_remote_tag :url => {:controller => 'layout', :action => 'doexpand'}, :html => {:id => 'expand'} do %>
+	<%= hidden_field_tag  "transacid", @transac.id %><br />
+	<%= hidden_field_tag  "roomno", @transac.room_no %><br /><br /> 
+	จำนวนวัน 
+	<input type="text" id="days" name="days" size="2" maxlength="2" style="text-align: right;" value="1" readonly>
+	<br /><br />
+	<input type="submit" value="ต่อ" class="ui-state-default ui-corner-all" id="payment_submit">
+<% end %>
+</center>

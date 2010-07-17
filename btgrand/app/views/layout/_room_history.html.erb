@@ -1,0 +1,8 @@
+<% if not @history.nil? %>	
+<h6>&nbsp; &nbsp; บันทึกการย้ายห้อง</h6>
+<ul>
+	<% @history.each do |hist| %>
+		<li><%= hist.room_no %> : <%= hist.updated_at.strftime('%d/%m/%Y - %H:%M') %></li>
+	<% end %>	
+</ul>		
+<% end %>

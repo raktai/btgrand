@@ -1,0 +1,4 @@
+page.replace_html("customers_list", :partial => "each_customer", :collection => @customers)
+
+page.call "after_search"
+

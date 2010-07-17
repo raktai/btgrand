@@ -1,0 +1,9 @@
+<tr class="<%= cycle('list-line-odd', 'list-line-even') %>">    
+	<td><%=h each_customer.name %></td>
+	<td><%=h each_customer.sname %></td>
+	<td><%=h each_customer.nickname %></td>
+	<td><%=h each_customer.phone %></td>
+	<td><%=h each_customer.phone_work %></td>
+	<td width="25"><%= image_tag("view.gif", :border=>0, :title => "ดู", :cust_id => each_customer.id ) %></td>
+	<td width="25"><%= image_tag("delete.gif", :border=>0, :title => "ลบรายการ", :del_id => each_customer.id) %></td>	
+</tr>
